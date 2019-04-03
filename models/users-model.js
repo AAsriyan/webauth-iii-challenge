@@ -4,7 +4,8 @@ module.exports = {
   add,
   find,
   findBy,
-  findById
+  findById,
+  findByDept
 };
 
 function find() {
@@ -19,6 +20,10 @@ function findById(id) {
   return db("users")
     .where({ id })
     .first();
+}
+
+function findByDept(dept) {
+  return db("users").where({ department: dept });
 }
 
 async function add(user) {
