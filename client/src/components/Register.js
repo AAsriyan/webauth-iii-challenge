@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import baseUrl from "../config/baseURL.js";
 import axios from "axios";
 
 export class Register extends Component {
@@ -8,34 +9,6 @@ export class Register extends Component {
       password: "",
       department: ""
     }
-  };
-
-  handleRegChanges = e => {
-    this.setState({
-      registration: {
-        ...this.state.registration,
-        [e.target.name]: e.target.value
-      }
-    });
-  };
-
-  register = e => {
-    e.preventDefault();
-    let newUser = {
-      username: this.state.registration.username,
-      password: this.state.registration.password,
-      department: this.state.registration.department
-    };
-
-    const newLogin = {
-      username: this.state.registration.username,
-      password: this.state.registration.password
-    };
-
-    axios
-      .post("http://localhost:5000/api/auth/register", newUser)
-      .then(() => this.props.history.push("/users"))
-      .catch(err => console.log(err));
   };
 
   render() {
@@ -82,6 +55,34 @@ export class Register extends Component {
       </div>
     );
   }
+
+  handleRegChanges = e => {
+    this.setState({
+      registration: {
+        ...this.state.registration,
+        [e.target.name]: e.target.value
+      }
+    });
+  };
+
+  register = e => {
+    e.preventDefault();
+    let newUser = {
+      username: this.state.registration.username,
+      password: this.state.registration.password,
+      department: this.state.registration.department
+    };
+
+    const newLogin = {
+      username: this.state.registration.username,
+      password: this.state.registration.password
+    };
+
+    axios
+      .post("/auth/register", newUser)
+      .then(() => this.props.history.push("/users"))
+      .catch(err => console.log(err));
+  };
 }
 
 export default Register;

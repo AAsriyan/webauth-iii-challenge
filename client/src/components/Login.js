@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import baseUrl from "../config/baseURL.js";
 import axios from "axios";
 
 export class Login extends Component {
@@ -27,9 +28,9 @@ export class Login extends Component {
     };
 
     axios
-      .post("http://localhost:5000/api/login", loggedUser)
+      .post("/auth/login", loggedUser)
       .then(res => {
-        localStorage.setItem("auth", `${this.state.credentials.username}`);
+        localStorage.setItem("token", res.data.token);
         this.props.history.push("/users");
       })
       .catch(err => console.log(err));
